@@ -5,6 +5,7 @@ import requests, itchat
 from itchat.content import *
 import neihanshequ
 import re
+import tuling
 
 # default settings
 autoReply = True
@@ -121,16 +122,18 @@ def reply(msg):
         # auto-reply
         if autoReply:
             # if remarkName in autoDict:
-            if '段子' in msg["Text"]:
+            # if '段子' in msg["Text"]:
+            if remarkName:
                 # if showAutoPrefix:
                 #     reply = autoPrefix
                 # reply += autoDict[remarkName]
-                reply = neihanshequ.get_duanzi()
+                # reply = neihanshequ.get_duanzi()
+                reply = tuling.get_replay(msg['FromUserName'],  msg["Text"])
 
-        print("收到消息 -> %s : %s"%(remarkName, msg["Text"]))
-        print("回复消息 -> %s\n"%(reply))
+                print("收到消息 -> %s : %s"%(remarkName, msg["Text"]))
+                print("回复消息 -> %s\n"%(reply))
 
-        itchat.send(reply, msg['FromUserName'])
+                itchat.send(reply, msg['FromUserName'])
 
 itchat.auto_login(enableCmdQR = True)
 itchat.run()

@@ -1,4 +1,6 @@
 */__pycache__
+build/*
+*.spec
 *.pyc
 .svn/
 log/*
